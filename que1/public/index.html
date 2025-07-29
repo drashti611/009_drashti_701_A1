@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Demo</title>
+    <script>
+      function callHello() {
+        fetch("/gethello")
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Network Error...");
+            }
+            return response.text();
+          })
+          .then(data => {
+            document.getElementById('response').textContent = data;
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>AJAX call</h1>
+    <button onclick="callHello()">Call /gethello</button>
+    <div id="response" style="margin-top: 20px; font-size: 18px;"></div>
+  </body>
+</html>
